@@ -1,0 +1,7 @@
+# gatsby.js
+.cache/
+public/
+__generated__/
+
+# local env files
+.env.local
