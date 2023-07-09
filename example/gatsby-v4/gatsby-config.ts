@@ -4,16 +4,16 @@
  * @see {@link https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/}
  */
 
-import dotenv from 'dotenv'
-import type { GatsbyConfig } from 'gatsby'
-import { resolve } from 'node:path'
+import dotenv from 'dotenv';
+import type { GatsbyConfig } from 'gatsby';
+import { resolve } from 'node:path';
 
 /**
  * 環境変数を展開
  */
 dotenv.config({
   path: resolve(__dirname, '..', '.env.local'),
-})
+});
 
 const config: GatsbyConfig = {
   jsxRuntime: 'automatic',
@@ -43,6 +43,6 @@ const config: GatsbyConfig = {
       },
     },
   ],
-}
+};
 
-export default config
+export default config;

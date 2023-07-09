@@ -22,7 +22,7 @@ module.exports = function fetchData(url, { apiKey, query }) {
     headers: {
       'x-microcms-api-key': apiKey,
     },
-  }).then(async res => {
+  }).then(async (res) => {
     const body = await res.json();
     return { body, statusCode: res.status };
   });

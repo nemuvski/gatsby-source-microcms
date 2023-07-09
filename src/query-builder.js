@@ -37,13 +37,13 @@ const contains = (key, value) => `${key}[contains]${value}`;
  * [exists]
  * @param {string} key
  */
-const exists = key => `${key}[exists]`;
+const exists = (key) => `${key}[exists]`;
 
 /**
  * [not_exists]
  * @param {string} key
  */
-const notExists = key => `${key}[not_exists]`;
+const notExists = (key) => `${key}[not_exists]`;
 
 /**
  * [begins_with]

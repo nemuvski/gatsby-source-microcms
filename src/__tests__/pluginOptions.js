@@ -36,9 +36,11 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint'
-      }],
+      apis: [
+        {
+          endpoint: 'endpoint',
+        },
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -48,9 +50,11 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint'
-      }],
+      apis: [
+        {
+          endpoint: 'endpoint',
+        },
+      ],
     };
 
     Object.keys(options).forEach((key, index) => {
@@ -64,10 +68,12 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        type: 'type',
-      }],
+      apis: [
+        {
+          endpoint: 'endpoint',
+          type: 'type',
+        },
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -77,32 +83,40 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        type: '',
-      }],
+      apis: [
+        {
+          endpoint: 'endpoint',
+          type: '',
+        },
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic.mock.calls.length).toBe(1);
   });
 
   test('format option should be success.', () => {
-    const options = [{
-      apiKey: 'key',
-      serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        format: 'list'
-      }],
-    },
-    {
-      apiKey: 'key',
-      serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        format: 'object'
-      }],
-    }];
+    const options = [
+      {
+        apiKey: 'key',
+        serviceId: 'id',
+        apis: [
+          {
+            endpoint: 'endpoint',
+            format: 'list',
+          },
+        ],
+      },
+      {
+        apiKey: 'key',
+        serviceId: 'id',
+        apis: [
+          {
+            endpoint: 'endpoint',
+            format: 'object',
+          },
+        ],
+      },
+    ];
 
     for (let option of options) {
       validateOptions({ reporter }, option);
@@ -114,10 +128,12 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        format: 'array'
-      }],
+      apis: [
+        {
+          endpoint: 'endpoint',
+          format: 'array',
+        },
+      ],
     };
 
     validateOptions({ reporter }, options);
@@ -128,12 +144,14 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          draftKey: 'DRAFT_KEY',
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            draftKey: 'DRAFT_KEY',
+          },
         },
-      }],
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -143,12 +161,14 @@ describe('validateOptions', () => {
     const options = (draftKey) => ({
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          draftKey,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            draftKey,
+          },
         },
-      }],
+      ],
     });
 
     // empty string
@@ -169,12 +189,14 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          fields: ['id', 'title'].join(','),
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            fields: ['id', 'title'].join(','),
+          },
         },
-      }],
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -184,20 +206,19 @@ describe('validateOptions', () => {
     const options = (fields) => ({
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          fields,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            fields,
+          },
         },
-      }],
+      ],
     });
     validateOptions({ reporter }, options({}));
     expect(reporter.panic.mock.calls.length).toBe(1);
 
-    validateOptions(
-      { reporter },
-      options(['id', 123])
-    );
+    validateOptions({ reporter }, options(['id', 123]));
     expect(reporter.panic.mock.calls.length).toBe(2);
   });
 
@@ -205,12 +226,14 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          limit: 1,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            limit: 1,
+          },
         },
-      }],
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -220,12 +243,14 @@ describe('validateOptions', () => {
     const options = (limit) => ({
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          limit,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            limit,
+          },
         },
-      }],
+      ],
     });
 
     // string
@@ -246,12 +271,14 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          offset: 1,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            offset: 1,
+          },
         },
-      }],
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -261,12 +288,14 @@ describe('validateOptions', () => {
     const options = (offset) => ({
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          offset,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            offset,
+          },
         },
-      }],
+      ],
     });
 
     // string
@@ -287,12 +316,14 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          filters: 'tag[exists]',
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            filters: 'tag[exists]',
+          },
         },
-      }],
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -302,12 +333,14 @@ describe('validateOptions', () => {
     const options = (filters) => ({
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          filters,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            filters,
+          },
         },
-      }],
+      ],
     });
 
     // empty string
@@ -328,12 +361,14 @@ describe('validateOptions', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          depth: 3,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            depth: 3,
+          },
         },
-      }],
+      ],
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -343,12 +378,14 @@ describe('validateOptions', () => {
     const options = (depth) => ({
       apiKey: 'key',
       serviceId: 'id',
-      apis: [{
-        endpoint: 'endpoint',
-        query: {
-          depth,
+      apis: [
+        {
+          endpoint: 'endpoint',
+          query: {
+            depth,
+          },
         },
-      }],
+      ],
     });
 
     // string

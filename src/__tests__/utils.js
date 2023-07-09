@@ -1,9 +1,4 @@
-const {
-  makeTypeName,
-  isListContent,
-  isObjectContent,
-  createContentNode,
-} = require('../utils');
+const { makeTypeName, isListContent, isObjectContent, createContentNode } = require('../utils');
 
 const createNode = jest.fn();
 const createNodeId = jest.fn();

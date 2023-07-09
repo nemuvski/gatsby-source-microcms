@@ -2,18 +2,15 @@ const { createPluginConfig } = require('./pluginOptions');
 const fetchData = require('./fetch');
 const { createContentNode } = require('./utils');
 
-const sourceNodes = async (
-  { actions, createNodeId, reporter },
-  pluginOptions
-) => {
+const sourceNodes = async ({ actions, createNodeId, reporter }, pluginOptions) => {
   const { createNode } = actions;
 
   const pluginConfig = createPluginConfig(pluginOptions);
 
   for await (const api of pluginConfig.get('apis')) {
-    const apiUrl = `https://${pluginConfig.get(
-      'serviceId'
-    )}.microcms.io/api/${pluginConfig.get('version')}/${api.endpoint}`;
+    const apiUrl = `https://${pluginConfig.get('serviceId')}.microcms.io/api/${pluginConfig.get('version')}/${
+      api.endpoint
+    }`;
 
     const { format = 'list' } = api;
 
@@ -34,9 +31,7 @@ message: ${body.message}`);
         }
 
         if (!Array.isArray(body.contents)) {
-          reporter.panic(
-            `format set to 'list' but got ${typeof body.contents}`
-          );
+          reporter.panic(`format set to 'list' but got ${typeof body.contents}`);
           return;
         }
         body.contents.forEach((content, index) => {

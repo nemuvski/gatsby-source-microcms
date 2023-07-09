@@ -2,35 +2,21 @@ const crypto = require('crypto');
 const camelCase = require('camelcase');
 
 const typePrefix = 'Microcms';
-const makeTypeName = type =>
-  camelCase([typePrefix, type], { pascalCase: true });
+const makeTypeName = (type) => camelCase([typePrefix, type], { pascalCase: true });
 
 const isListContent = ({ format, content }) => {
   return format === 'list' && Array.isArray(content);
 };
 
 const isObjectContent = ({ format, content }) => {
-  return (
-    format === 'object' &&
-    typeof content === 'object' &&
-    !Array.isArray(content) &&
-    !!Object.keys(content).length
-  );
+  return format === 'object' && typeof content === 'object' && !Array.isArray(content) && !!Object.keys(content).length;
 };
 
 const makeId = ({ serviceId, id, endpoint }) => {
   return `${serviceId}___${id}___${endpoint}`;
 };
 
-const createContentNode = ({
-  createNode,
-  createNodeId,
-  sortIndex,
-  content,
-  serviceId,
-  endpoint,
-  type,
-}) => {
+const createContentNode = ({ createNode, createNodeId, sortIndex, content, serviceId, endpoint, type }) => {
   const nodeContent = JSON.stringify(content);
   const nodeId = createNodeId(
     makeId({
@@ -39,10 +25,7 @@ const createContentNode = ({
       endpoint,
     })
   );
-  const nodeContentDigest = crypto
-    .createHash('md5')
-    .update(nodeContent)
-    .digest('hex');
+  const nodeContentDigest = crypto.createHash('md5').update(nodeContent).digest('hex');
 
   // type option. default is endpoint value.
   const _type = type || endpoint;
