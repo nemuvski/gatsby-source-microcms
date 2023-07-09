@@ -1,50 +1,51 @@
-const qb = require('../query-builder');
+import { describe, test, expect } from 'vitest';
+import * as qb from '../query-builder';
 
-const key = 'title';
-const value = 'Hello!';
+describe('query-builder.ts', () => {
+  const key = 'title';
+  const value = 'Hello!';
 
-describe('query-builder', () => {
-  test('equals', () => {
+  test('equals()', () => {
     expect(qb.equals(key, value)).toBe(`${key}[equals]${value}`);
     expect(qb.eq(key, value)).toBe(`${key}[equals]${value}`);
   });
 
-  test('notEquals', () => {
+  test('notEquals()', () => {
     expect(qb.notEquals(key, value)).toBe(`${key}[not_equals]${value}`);
     expect(qb.neq(key, value)).toBe(`${key}[not_equals]${value}`);
   });
 
-  test('lessThan', () => {
+  test('lessThan()', () => {
     expect(qb.lessThan(key, value)).toBe(`${key}[less_than]${value}`);
     expect(qb.lt(key, value)).toBe(`${key}[less_than]${value}`);
   });
 
-  test('greaterThan', () => {
+  test('greaterThan()', () => {
     expect(qb.greaterThan(key, value)).toBe(`${key}[greater_than]${value}`);
     expect(qb.gt(key, value)).toBe(`${key}[greater_than]${value}`);
   });
 
-  test('contains', () => {
+  test('contains()', () => {
     expect(qb.contains(key, value)).toBe(`${key}[contains]${value}`);
   });
 
-  test('exists', () => {
+  test('exists()', () => {
     expect(qb.exists(key)).toBe(`${key}[exists]`);
   });
 
-  test('notExists', () => {
+  test('notExists()', () => {
     expect(qb.notExists(key)).toBe(`${key}[not_exists]`);
   });
 
-  test('beginsWith', () => {
+  test('beginsWith()', () => {
     expect(qb.beginsWith(key, value)).toBe(`${key}[begins_with]${value}`);
   });
 
-  test('and', () => {
+  test('and()', () => {
     expect(qb.and('filter1', 'filter2')).toBe(`filter1[and]filter2`);
   });
 
-  test('or', () => {
+  test('or()', () => {
     expect(qb.or('filter1', 'filter2')).toBe(`filter1[or]filter2`);
   });
 });

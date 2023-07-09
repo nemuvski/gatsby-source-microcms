@@ -1,0 +1,26 @@
+{
+  "include": ["src"],
+  "exclude": [],
+
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "declaration": false,
+    "removeComments": false,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "incremental": false,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true
+  }
+}
