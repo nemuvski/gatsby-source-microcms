@@ -167,7 +167,7 @@ module.exports = {
 
 #### filters
 
-This plugin provides [filters query](https://microcms.io/blog/filters-parameter/) building helper.
+This plugin provides [filters query](https://document.microcms.io/content-api/get-list-contents#hdebbdc8e86) building helper.
 
 ```js
 // gatsby-config.js
