@@ -143,7 +143,7 @@ module.exports = {
             /**
              * API request query options. (Optional)
              *
-             * Type:
+             * Type: (@type {import('microcms-js-sdk').MicroCMSQueries} for more details)
              *   draftKey: string.
              *   limit: number.
              *   offset: number.
