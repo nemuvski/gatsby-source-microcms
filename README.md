@@ -9,11 +9,14 @@ Source plugin for Gatsby from [microCMS](https://microcms.io/).
 
 ```sh
 # npm
-$ npm install gatsby-source-microcms
+$ npm install gatsby-source-microcms microcms-js-sdk@^2
 
 # or yarn
-$ yarn add gatsby-source-microcms
+$ yarn add gatsby-source-microcms microcms-js-sdk@^2
 ```
+
+The `microcms-js-sdk` is required to use this plugin.
+
 
 ## How to use
 
