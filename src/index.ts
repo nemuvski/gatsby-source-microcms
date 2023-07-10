@@ -1,2 +1,1 @@
-export type { MicroCMSPluginOptions } from './plugin-options';
-export * as QueryBuilder from './query-builder';
+export * from './query-builder';
