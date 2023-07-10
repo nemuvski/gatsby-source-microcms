@@ -175,7 +175,7 @@ const {
   and,
   contains,
   exists,
-} = require('gatsby-source-microcms/src/query-builder');
+} = require('gatsby-source-microcms');
 
 module.exports = {
   plugins: [
