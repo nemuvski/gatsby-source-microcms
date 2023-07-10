@@ -7,12 +7,14 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [10, 12]
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Run with Node v${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Versions
@@ -20,4 +22,4 @@ jobs:
           echo "node: $(node -v)"
           echo "npm: $(npm -v)"
       - run: npm ci
-      - run: npm test
+      - run: npm run test
