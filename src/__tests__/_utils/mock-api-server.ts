@@ -1,6 +1,6 @@
-import { rest } from 'msw';
 import type { MicroCMSObjectContent } from 'microcms-js-sdk';
 import type { MicroCMSListResponse } from 'microcms-js-sdk';
+import { http, HttpResponse } from 'msw';
 
 const mockServiceId = 'test';
 const mockApiKey = '__this_is_api_key__';
@@ -54,70 +54,54 @@ const mockApiServerEndpointHandlers = [
   /**
    * Endpoint handlers for list data
    */
-  rest.get(
-    `https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.list.notFound}`,
-    (_, res, ctx) => {
-      return res(ctx.status(404), ctx.json({ message: 'not found' }));
-    }
-  ),
-  rest.get(
-    `https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.list.postsEmpty}`,
-    (_, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.json({
-          totalCount: 0,
-          offset: 0,
-          limit: 10,
-          contents: [],
-        })
-      );
-    }
-  ),
-  rest.get(
+  http.get(`https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.list.notFound}`, () => {
+    return HttpResponse.json({ message: 'not found' }, { status: 404 });
+  }),
+  http.get(`https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.list.postsEmpty}`, () => {
+    return HttpResponse.json(
+      {
+        totalCount: 0,
+        offset: 0,
+        limit: 10,
+        contents: [],
+      },
+      { status: 200 }
+    );
+  }),
+  http.get(
     `https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.list.postsMany}`,
-    (req, res, ctx) => {
-      const offset = req.url.searchParams.get('offset');
-      const limit = req.url.searchParams.get('limit');
-      return res(
-        ctx.status(200),
-        ctx.json(
-          mockResponseListPostsPayload({ offset: offset ? Number(offset) : 0, limit: limit ? Number(limit) : 10 })
-        )
+    ({ request }) => {
+      const reqUrl = new URL(request.url);
+      const offset = reqUrl.searchParams.get('offset');
+      const limit = reqUrl.searchParams.get('limit');
+      return HttpResponse.json(
+        mockResponseListPostsPayload({ offset: offset ? Number(offset) : 0, limit: limit ? Number(limit) : 10 }),
+        { status: 200 }
       );
     }
   ),
-  rest.get(
-    `https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.list.postsInvalid}`,
-    (_, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.json({
-          totalCount: 10,
-          offset: 0,
-          limit: 10,
-          // 無効なレスポンスであることをテストしたいため、配列ではないものを設定
-          contents: {},
-        })
-      );
-    }
-  ),
+  http.get(`https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.list.postsInvalid}`, () => {
+    return HttpResponse.json(
+      {
+        totalCount: 10,
+        offset: 0,
+        limit: 10,
+        // 無効なレスポンスであることをテストしたいため、配列ではないものを設定
+        contents: {},
+      },
+      { status: 200 }
+    );
+  }),
 
   /**
    * Endpoint handlers for object data
    */
-  rest.get(
-    `https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.object.notFound}`,
-    (_, res, ctx) => {
-      return res(ctx.status(404), ctx.json({ message: 'not found' }));
-    }
-  ),
-  rest.get(
-    `https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.object.some}`,
-    (_, res, ctx) => {
-      return res(ctx.status(200), ctx.json(mockResponseObjectSomePayload));
-    }
-  ),
+  http.get(`https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.object.notFound}`, () => {
+    return HttpResponse.json({ message: 'not found' }, { status: 404 });
+  }),
+  http.get(`https://${mockServiceId}.microcms.io/api/${__version}/${mockApiServerEndpoints.object.some}`, () => {
+    return HttpResponse.json(mockResponseObjectSomePayload, { status: 200 });
+  }),
 ];
 
 export {
