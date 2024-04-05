@@ -1,11 +1,11 @@
-import type { PartiallyRequired } from './util-types';
 import type { MicroCMSQueries } from 'microcms-js-sdk';
+import type { PartiallyRequired } from './util-types';
 
 const ApiFormat = {
   List: 'list',
   Object: 'object',
 } as const;
-type ApiFormat = (typeof ApiFormat)[keyof typeof ApiFormat];
+type ApiFormatType = (typeof ApiFormat)[keyof typeof ApiFormat];
 
 type MicroCMSPluginOptionsApi = {
   /**
@@ -32,7 +32,7 @@ type MicroCMSPluginOptionsApi = {
    *
    * @default 'list'
    */
-  format?: ApiFormat;
+  format?: ApiFormatType;
   /**
    * API request query options. (Optional)
    */

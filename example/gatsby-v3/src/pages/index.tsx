@@ -1,7 +1,8 @@
-import React from 'react';
 import type { PageProps } from 'gatsby';
-import type { FC } from 'react';
 import { graphql } from 'gatsby';
+// biome-ignore lint/correctness/noUnusedImports: import React が必要なため無視
+import React from 'react';
+import type { FC } from 'react';
 
 const HomePage: FC<PageProps> = ({ data }) => {
   return (
